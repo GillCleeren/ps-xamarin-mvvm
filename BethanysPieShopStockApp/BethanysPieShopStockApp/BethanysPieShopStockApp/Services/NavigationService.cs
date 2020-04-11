@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BethanysPieShopStockApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,13 +24,12 @@ namespace BethanysPieShopStockApp.Services
             Type pageType;
             if (pages.TryGetValue(pageKey, out pageType))
             {
-                var displayPage = (Page)Activator.CreateInstance(pageType);
-                displayPage.SetNavigationArgs(parameter);
+                var page = (Page)Activator.CreateInstance(pageType);
+                page.SetNavigationArgs(parameter);
 
                 if (historyBehavior == HistoryBehavior.ClearHistory)
                 {
-                    MainPage.Navigation.InsertPageBefore(displayPage,
-                        MainPage.Navigation.NavigationStack[0]);
+                    MainPage.Navigation.InsertPageBefore(page, MainPage.Navigation.NavigationStack[0]);
 
                     var existingPages = MainPage.Navigation.NavigationStack.ToList();
                     for (int i = 1; i < existingPages.Count; i++)
@@ -37,8 +37,10 @@ namespace BethanysPieShopStockApp.Services
                 }
                 else
                 {
-                    MainPage.Navigation.PushAsync(displayPage);
+                    MainPage.Navigation.PushAsync(page);
                 }
+
+                (page.BindingContext as BaseViewModel).Initialize(parameter);
             }
             else
             {
@@ -56,8 +58,7 @@ namespace BethanysPieShopStockApp.Services
 
     public static class NavigationExtensions
     {
-        private static ConditionalWeakTable<Page, object> arguments
-            = new ConditionalWeakTable<Page, object>();
+        private static ConditionalWeakTable<Page, object> arguments = new ConditionalWeakTable<Page, object>();
 
         public static object GetNavigationArgs(this Page page)
         {

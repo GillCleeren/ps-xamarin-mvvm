@@ -14,22 +14,19 @@ namespace BethanysPieShopStockApp.ViewModels
         {
             SelectedPie = new Pie();
             SaveCommand = new Command(OnSaveCommand);
-            MessagingCenter.Subscribe<PieOverviewViewModel, Pie>
-                (this, MessageNames.PieSelectedMessage, OnPieSelected);
         }
 
         public ICommand SaveCommand { get; }
 
         private void OnSaveCommand()
         {
-            PieRepository.AddPie(SelectedPie);
+            if (SelectedPie.Id == 0)
+                PieRepository.AddPie(SelectedPie);
+            else
+                PieRepository.SavePie(SelectedPie);
+
             MessagingCenter.Send(this, MessageNames.PieAddedMessage, SelectedPie);
             App.NavigationService.GoBack();
-        }
-
-        private void OnPieSelected(PieOverviewViewModel vm, Pie pie)
-        {
-            SelectedPie = pie;
         }
 
         public Pie SelectedPie
@@ -40,6 +37,14 @@ namespace BethanysPieShopStockApp.ViewModels
                 _selectedPie = value;
                 OnPropertyChanged(nameof(SelectedPie));
             }
+        }
+
+        public override void Initialize(object parameter)
+        {
+            if (parameter == null)
+                SelectedPie = new Pie();
+            else
+                SelectedPie = parameter as Pie;
         }
     }
 }

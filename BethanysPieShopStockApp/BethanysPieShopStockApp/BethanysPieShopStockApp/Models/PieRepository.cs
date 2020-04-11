@@ -26,5 +26,12 @@ namespace BethanysPieShopStockApp.Models
         {
             Pies.Add(pie);
         }
+
+        public static void SavePie(Pie pie)
+        {
+            var oldPie = Pies.Where(p => p.Id == pie.Id).FirstOrDefault();
+            Pies.Remove(oldPie);
+            Pies.Add(pie);
+        }
     }
 }

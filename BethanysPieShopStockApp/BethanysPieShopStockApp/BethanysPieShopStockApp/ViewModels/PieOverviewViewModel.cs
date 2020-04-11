@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BethanysPieShopStockApp.Models;
 using BethanysPieShopStockApp.Utility;
@@ -44,11 +43,10 @@ namespace BethanysPieShopStockApp.ViewModels
 
         private void OnPieSelectedCommand(Pie pie)
         {
-            MessagingCenter.Send(this, MessageNames.PieSelectedMessage, pie);
-            App.NavigationService.NavigateTo("PieDetailView");
+            App.NavigationService.NavigateTo("PieDetailView", pie);
         }
 
-        private void OnAddCommand(object obj)
+        private void OnAddCommand()
         {
             App.NavigationService.NavigateTo("PieDetailView");
         }
