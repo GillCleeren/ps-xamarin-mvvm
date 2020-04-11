@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace BethanysPieShopStockApp.Services
 {
-    public class NavigationService
+    public class NavigationService : INavigationService
     {
         private Dictionary<string, Type> pages { get; } = new Dictionary<string, Type>();
 

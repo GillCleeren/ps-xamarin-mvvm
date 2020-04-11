@@ -3,13 +3,8 @@ using System.Collections.Generic;
 
 namespace BethanysPieShopStockApp.Services
 {
-    public class PieDataService
+    public class PieDataService: IPieDataService
     {
-        public PieDataService()
-        {
-
-        }
-
         public List<Pie> GetAllPies() 
         {
             return PieRepository.Pies;

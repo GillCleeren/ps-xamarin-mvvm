@@ -1,4 +1,5 @@
 ﻿using BethanysPieShopStockApp.Models;
+using BethanysPieShopStockApp.Services;
 using BethanysPieShopStockApp.Utility;
 using System;
 using System.Windows.Input;
@@ -10,8 +11,14 @@ namespace BethanysPieShopStockApp.ViewModels
     {
         private Pie _selectedPie;
 
-        public PieDetailViewModel()
+        private IPieDataService _pieDataService;
+        private INavigationService _navigationService;
+
+        public PieDetailViewModel(IPieDataService pieDataService, INavigationService navigationService)
         {
+            _pieDataService = pieDataService;
+            _navigationService = navigationService;
+
             SelectedPie = new Pie();
             SaveCommand = new Command(OnSaveCommand);
         }
@@ -25,10 +32,15 @@ namespace BethanysPieShopStockApp.ViewModels
             //else
             //    PieRepository.SavePie(SelectedPie);
 
+            //if (SelectedPie.Id == Guid.Empty)
+            //    App.PieDataServie.AddPie(SelectedPie);
+            //else
+            //    App.PieDataServie.UpdatePie(SelectedPie);
+
             if (SelectedPie.Id == Guid.Empty)
-                App.PieDataServie.AddPie(SelectedPie);
+                _pieDataService.AddPie(SelectedPie);
             else
-                App.PieDataServie.UpdatePie(SelectedPie);
+                _pieDataService.UpdatePie(SelectedPie);
 
             MessagingCenter.Send(this, MessageNames.PieChangedMessage, SelectedPie);
             App.NavigationService.GoBack();
