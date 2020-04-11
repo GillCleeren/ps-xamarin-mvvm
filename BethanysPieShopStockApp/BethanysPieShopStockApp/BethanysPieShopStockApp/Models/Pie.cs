@@ -1,19 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace BethanysPieShopStockApp.Models
 {
-    public class Pie
+    public class Pie : INotifyPropertyChanged
     {
-        public int Id { get; set; }
+        private Guid _id;
+        private string _pieName;
+        private string _description;
+        private double _price;
+        private string _imageUrl;
+        private bool _inStock;
 
-        public string PieName { get; set; }
+        public Guid Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                RaisePropertyChanged(nameof(Id));
+            }
+        }
 
-        public string Description { get; set; }
+        public string PieName
+        {
+            get => _pieName;
+            set
+            {
+                _pieName = value;
+                RaisePropertyChanged(nameof(PieName));
+            }
+        }
 
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
-        public bool InStock { get; set; }
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                _description = value;
+                RaisePropertyChanged(nameof(Description));
+            }
+        }
+
+        public double Price
+        {
+            get => _price;
+            set
+            {
+                _price = value;
+                RaisePropertyChanged(nameof(Price));
+            }
+        }
+
+        public string ImageUrl
+        {
+            get => _imageUrl;
+            set
+            {
+                _imageUrl = value;
+                RaisePropertyChanged(nameof(ImageUrl));
+            }
+        }
+
+        public bool InStock
+        {
+            get => _inStock;
+            set
+            {
+                _inStock = value;
+                RaisePropertyChanged(nameof(InStock));
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

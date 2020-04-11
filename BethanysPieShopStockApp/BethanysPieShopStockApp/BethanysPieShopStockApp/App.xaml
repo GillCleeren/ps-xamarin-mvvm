@@ -10,14 +10,6 @@
         <Color x:Key="BethanysGreenColor">#22cfa7</Color>
 
         <converter:ItemTappedConverter x:Key="LocalItemTappedConverter"></converter:ItemTappedConverter>
-       
-
-        <Color x:Key="BethanyPurple">#a594c1</Color>
-        <Color x:Key="HeaderGrey">#aaaaaa</Color>
-        <Color x:Key="PlainGrey">#aaaaaa</Color>
-        <Color x:Key="LightGrey">#cccccc</Color>
-        <Color x:Key="EntryGrey">Gray</Color>
-        <Color x:Key="LightForeground">White</Color>
         
         <Style x:Key="RegularButtonStyle" TargetType="Button">
             <Setter Property="HorizontalOptions" Value="Center"></Setter>

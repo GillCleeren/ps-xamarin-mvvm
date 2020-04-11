@@ -24,7 +24,7 @@
                     <ColumnDefinition Width=".6*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="TitleLabel" 
-                   Text="Edit pie"
+                   Text="Pie management"
                    Grid.Row="0" 
                    Grid.Column="0" 
                    Grid.ColumnSpan="2" 

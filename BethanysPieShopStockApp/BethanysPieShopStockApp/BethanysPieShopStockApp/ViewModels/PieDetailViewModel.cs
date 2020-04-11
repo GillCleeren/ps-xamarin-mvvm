@@ -20,12 +20,12 @@ namespace BethanysPieShopStockApp.ViewModels
 
         private void OnSaveCommand()
         {
-            if (SelectedPie.Id == 0)
+            if (SelectedPie.Id == Guid.Empty)
                 PieRepository.AddPie(SelectedPie);
             else
                 PieRepository.SavePie(SelectedPie);
 
-            MessagingCenter.Send(this, MessageNames.PieAddedMessage, SelectedPie);
+            MessagingCenter.Send(this, MessageNames.PieChangedMessage, SelectedPie);
             App.NavigationService.GoBack();
         }
 

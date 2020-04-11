@@ -29,7 +29,7 @@ namespace BethanysPieShopStockApp.ViewModels
             Pies = new ObservableCollection<Pie>();
 
             MessagingCenter.Subscribe<PieDetailViewModel, Pie>
-                (this, MessageNames.PieAddedMessage, OnPieAdded);
+                (this, MessageNames.PieChangedMessage, OnPieChanged);
         }
 
         public ICommand LoadCommand { get; }
@@ -51,8 +51,9 @@ namespace BethanysPieShopStockApp.ViewModels
             App.NavigationService.NavigateTo("PieDetailView");
         }
 
-        private void OnPieAdded(PieDetailViewModel sender, Pie pie)
+        private void OnPieChanged(PieDetailViewModel sender, Pie pie)
         {
+            Pies = new ObservableCollection<Pie>();
             Pies = PieRepository.Pies.ToObservableCollection();
         }
     }
