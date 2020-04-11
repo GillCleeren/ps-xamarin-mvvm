@@ -16,10 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\PieOverviewView.xaml.cs">
+      <DependentUpon>PieOverviewView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\PieDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PieOverview.xaml">
+    <EmbeddedResource Update="Views\PieOverviewView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

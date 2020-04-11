@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:BethanysPieShopStockApp.Behaviors;assembly=BethanysPieShopStockApp"
-             x:Class="BethanysPieShopStockApp.Views.PieOverview">
+             x:Class="BethanysPieShopStockApp.Views.PieOverviewView"
+             BackgroundImage="patternwide.png"
+             Title="Bethany's Pie Shop Stock Management"
+             >
     <!--<ContentPage.BindingContext>
         <viewModels:PieOverviewViewModel></viewModels:PieOverviewViewModel>
     </ContentPage.BindingContext>-->
@@ -10,15 +13,14 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Button Grid.Row="0" Text="Load pies" Command="{Binding LoadCommand}" ></Button>
+        <Button Grid.Row="1" Text="Add new pie" Command="{Binding AddCommand}" ></Button>
 
-        <Button Grid.Row="0" Text="Load pies!" Command="{Binding LoadCommand}" ></Button>
-        <ListView Grid.Row="1" VerticalOptions="FillAndExpand"  
-                  ItemsSource="{Binding Pies}" CachingStrategy="RecycleElement"
-                SeparatorVisibility="Default"
-                RowHeight="30"
-                HasUnevenRows="True">
+        <ListView HasUnevenRows="True" Grid.Row="2" ItemsSource="{Binding Pies}"
+              x:Name="PiesListView" CachingStrategy="RecycleElement"  >
             <ListView.Behaviors>
                 <behaviors:EventToCommandBehavior 
                     EventName="ItemTapped" 
@@ -29,25 +31,22 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Margin="5" BackgroundColor="White" RowSpacing="2">
+                        <Grid HeightRequest="100"  Margin="5" BackgroundColor="White" RowSpacing="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="125"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0" Grid.RowSpan="2" HeightRequest="80" WidthRequest="100" VerticalOptions="Start" Margin="2,2,1,2" Source="{Binding ImageUrl}"></Image>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Margin="3" Style="{StaticResource PieTileNameStyle}"></Label>
-                            <Label Grid.Row="0" Grid.Column="2"  Margin="3" Text="{Binding Price}" Style="{StaticResource PieTilePriceStyle}" HorizontalTextAlignment="End"></Label>
-                            <Label Grid.Column="1" Grid.Row="1" Margin="3" Grid.ColumnSpan="2" Text="{Binding ShortDescription}" Style="{StaticResource PieTileDescriptionStyle}"></Label>
+                            <Image Grid.Row="0" HeightRequest="125" VerticalOptions="Start" Margin="2,2,1,2" Source="{Binding ImageUrl}"></Image>
+                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource MediumLabelStyle}" Text="{Binding PieName}" Margin="3" ></Label>
+                            <Label Grid.Row="0" Grid.Column="2" Margin="3" Text="{Binding Price}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" HorizontalTextAlignment="End"></Label>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
     </Grid>
 </ContentPage>

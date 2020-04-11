@@ -4,13 +4,7 @@ namespace BethanysPieShopStockApp.Utility
 {
     public static class ViewModelLocator
     {
-        public static BethanysPieShopStockApp.ViewModels.PieOverviewViewModel PieOverviewViewModel { get; set; }
-        public static PieDetailViewModel PieDetailViewModel { get; set; }
-
-        static ViewModelLocator()
-        {
-            PieOverviewViewModel = new BethanysPieShopStockApp.ViewModels.PieOverviewViewModel();
-            PieDetailViewModel = new PieDetailViewModel();
-        }
+        public static PieOverviewViewModel PieOverviewViewModel { get; set; } = new PieOverviewViewModel();
+        public static PieDetailViewModel PieDetailViewModel { get; set; } = new PieDetailViewModel();
     }
 }

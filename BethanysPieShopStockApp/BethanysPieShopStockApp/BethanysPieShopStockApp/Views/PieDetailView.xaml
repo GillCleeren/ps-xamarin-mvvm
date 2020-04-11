@@ -1,20 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BethanysPieShopStockApp.Views.PieDetailView">
+             BackgroundImage="patternwide.png"
+             x:Class="BethanysPieShopStockApp.Views.PieDetailView" 
+             Title="Bethany's Pie Shop Stock Management"
+             Padding="5">
     <ContentPage.Content>
-        <Grid Grid.Row="1" Margin="5" BackgroundColor="White" RowSpacing="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="{Binding SelectedPie.Name}" Margin="3" Style="{StaticResource PieTileNameStyle}"></Label>
-            <Label Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding SelectedPie.Price}" Style="{StaticResource PieTilePriceStyle}" HorizontalTextAlignment="End"></Label>
-            <Label Grid.Column="0" Grid.Row="1" Margin="3" Grid.ColumnSpan="2" Text="{Binding SelectedPie.ShortDescription}" ></Label>
-        </Grid>
+        <ScrollView>
+            <Grid Grid.Row="1" x:Name="PieGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".4*"></ColumnDefinition>
+                    <ColumnDefinition Width=".6*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="TitleLabel" 
+                   Text="Edit pie"
+                   Grid.Row="0" 
+                   Grid.Column="0" 
+                   Grid.ColumnSpan="2" 
+                   Style="{StaticResource TitleLabelStyle}"></Label>
+                <Image x:Name="PieImage" 
+                   Grid.Column="0"
+                   Grid.Row="1" 
+                   Grid.ColumnSpan="2"
+                   Source="{Binding SelectedPie.ImageUrl}"
+                   Margin="10" 
+                   WidthRequest="200" 
+                   HeightRequest="200" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"></Image>
+                <Label Text="Pie name" 
+                   Grid.Row="2" 
+                   Grid.Column="0"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Entry Grid.Row="2"
+                   Grid.Column="1"
+                   Text="{Binding SelectedPie.PieName, Mode=TwoWay}"
+                   Style="{StaticResource RegularEntry}"></Entry>
+                <Label Text="Price" 
+                   Grid.Row="3" 
+                   Grid.Column="0"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Entry Grid.Row="3"
+                   Grid.Column="1"
+                       Text="{Binding SelectedPie.Price, Mode=TwoWay}"
+                   Style="{StaticResource RegularEntry}"></Entry>
+                <Label Text="Description" 
+                   Grid.Row="4" 
+                   Grid.Column="0"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Editor Grid.Row="4"
+                   Grid.Column="1"
+                   Text="{Binding SelectedPie.Description, Mode=TwoWay}" 
+                   Style="{StaticResource RegularEditorStyle}"></Editor>
+                <Label Text="In stock?" 
+                   Grid.Row="5" 
+                   Grid.Column="0"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Switch Grid.Row="5"
+                   Grid.Column="1"
+                   IsToggled="{Binding SelectedPie.InStock, Mode=TwoWay}"
+                   ></Switch>
+                <Button x:Name="SavePieButton" 
+                    Command="{Binding SaveCommand}"
+                    Text="Save Pie" 
+                    Style="{StaticResource RegularButtonStyle}" 
+                    Grid.Row="6" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"></Button>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

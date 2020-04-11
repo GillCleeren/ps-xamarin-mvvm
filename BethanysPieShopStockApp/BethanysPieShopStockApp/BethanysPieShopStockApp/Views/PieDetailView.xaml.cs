@@ -10,7 +10,8 @@ namespace BethanysPieShopStockApp.Views
 		public PieDetailView ()
 		{
 			InitializeComponent ();
-		    this.BindingContext = ViewModelLocator.PieDetailViewModel;
+
+		    BindingContext = ViewModelLocator.PieDetailViewModel;
 		}
 	}
 }

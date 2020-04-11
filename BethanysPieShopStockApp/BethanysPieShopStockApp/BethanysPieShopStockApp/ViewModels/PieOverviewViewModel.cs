@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BethanysPieShopStockApp.Models;
 using BethanysPieShopStockApp.Utility;
@@ -6,13 +7,10 @@ using Xamarin.Forms;
 
 namespace BethanysPieShopStockApp.ViewModels
 {
-    public class PieOverviewViewModel: BaseViewModel
+    public class PieOverviewViewModel : BaseViewModel
     {
         private ObservableCollection<Pie> _pies;
-        private PieRepository _pieRepository;
-        private ICommand _loadCommand;
-        private ICommand _pieSelectedCommand;
-
+        
         public ObservableCollection<Pie> Pies
         {
             get => _pies;
@@ -23,27 +21,41 @@ namespace BethanysPieShopStockApp.ViewModels
             }
         }
 
-        public ICommand LoadCommand => _loadCommand ?? new Command(OnLoadCommand);
-        public ICommand PieSelectedCommand => 
-            _pieSelectedCommand ?? new Command<Pie>(OnPieSelectedCommand);
-
-        private void OnPieSelectedCommand(Pie pie)
+        public PieOverviewViewModel()
         {
-            MessagingCenter.Send(this, "PieSelected", pie);
-            App.NavigationService.NavigateTo("PieDetailView");
+            LoadCommand = new Command(OnLoadCommand);
+            AddCommand = new Command(OnAddCommand);
+            PieSelectedCommand = new Command<Pie>(OnPieSelectedCommand);
+
+            Pies = new ObservableCollection<Pie>();
+
+            MessagingCenter.Subscribe<PieDetailViewModel, Pie>
+                (this, MessageNames.PieAddedMessage, OnPieAdded);
         }
+
+        public ICommand LoadCommand { get; }
+        public ICommand PieSelectedCommand { get; }
+        public ICommand AddCommand { get; }
 
         private void OnLoadCommand()
         {
-            Pies = _pieRepository.Pies.ToObservableCollection();
+            Pies = PieRepository.Pies.ToObservableCollection();
         }
 
-        public PieOverviewViewModel()
+        private void OnPieSelectedCommand(Pie pie)
         {
-            _pieRepository = new PieRepository();
+            MessagingCenter.Send(this, MessageNames.PieSelectedMessage, pie);
+            App.NavigationService.NavigateTo("PieDetailView");
+        }
 
-            Pies = new ObservableCollection<Pie>();
-           
+        private void OnAddCommand(object obj)
+        {
+            App.NavigationService.NavigateTo("PieDetailView");
+        }
+
+        private void OnPieAdded(PieDetailViewModel sender, Pie pie)
+        {
+            Pies = PieRepository.Pies.ToObservableCollection();
         }
     }
 }

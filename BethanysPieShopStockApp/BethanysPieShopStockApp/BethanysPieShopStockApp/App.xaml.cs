@@ -1,24 +1,22 @@
 ﻿
 using BethanysPieShopStockApp.Services;
+using BethanysPieShopStockApp.Utility;
 using BethanysPieShopStockApp.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace BethanysPieShopStockApp
 {
     public partial class App : Application
     {
-        public static NavigationService NavigationService { get; }
-           = new NavigationService();
+        public static NavigationService NavigationService { get; }  = new NavigationService();
         public App()
         {
             InitializeComponent();
 
-            NavigationService.Configure("PieOverview", typeof(PieOverview));
-            NavigationService.Configure("PieDetailView", typeof(PieDetailView));
+            NavigationService.Configure(ViewNames.PieOverviewView, typeof(PieOverviewView));
+            NavigationService.Configure(ViewNames.PieDetailView, typeof(PieDetailView));
 
-            MainPage = new NavigationPage(new PieOverview());
+            MainPage = new NavigationPage(new PieOverviewView());
         }
 
         protected override void OnStart()
