@@ -6,10 +6,10 @@ using Xamarin.Forms;
 
 namespace BethanysPieShopStockApp.ViewModels
 {
-    public class PieDetailViewModel: BaseViewModel
+    public class PieDetailViewModel : BaseViewModel
     {
         private Pie _selectedPie;
-        
+
         public PieDetailViewModel()
         {
             SelectedPie = new Pie();
@@ -20,10 +20,15 @@ namespace BethanysPieShopStockApp.ViewModels
 
         private void OnSaveCommand()
         {
+            //if (SelectedPie.Id == Guid.Empty)
+            //    PieRepository.AddPie(SelectedPie);
+            //else
+            //    PieRepository.SavePie(SelectedPie);
+
             if (SelectedPie.Id == Guid.Empty)
-                PieRepository.AddPie(SelectedPie);
+                App.PieDataServie.AddPie(SelectedPie);
             else
-                PieRepository.SavePie(SelectedPie);
+                App.PieDataServie.UpdatePie(SelectedPie);
 
             MessagingCenter.Send(this, MessageNames.PieChangedMessage, SelectedPie);
             App.NavigationService.GoBack();

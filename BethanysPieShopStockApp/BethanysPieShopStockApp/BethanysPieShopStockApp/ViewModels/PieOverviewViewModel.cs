@@ -38,7 +38,8 @@ namespace BethanysPieShopStockApp.ViewModels
 
         private void OnLoadCommand()
         {
-            Pies = new ObservableCollection<Pie>(PieRepository.Pies);
+            //Pies = new ObservableCollection<Pie>(PieRepository.Pies);
+            Pies = new ObservableCollection<Pie>(App.PieDataServie.GetAllPies());
         }
 
         private void OnPieSelectedCommand(Pie pie)
@@ -53,7 +54,8 @@ namespace BethanysPieShopStockApp.ViewModels
 
         private void OnPieChanged(PieDetailViewModel sender, Pie pie)
         {
-            Pies = new ObservableCollection<Pie>(PieRepository.Pies);
+            //Pies = new ObservableCollection<Pie>(PieRepository.Pies);
+            Pies = new ObservableCollection<Pie>(App.PieDataServie.GetAllPies());
         }
     }
 }

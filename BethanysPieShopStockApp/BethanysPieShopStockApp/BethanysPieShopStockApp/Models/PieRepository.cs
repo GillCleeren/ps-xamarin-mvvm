@@ -61,7 +61,7 @@ namespace BethanysPieShopStockApp.Models
             Pies.Add(pie);
         }
 
-        public static void SavePie(Pie pie)
+        public static void UpdatePie(Pie pie)
         {
             var oldPie = Pies.Where(p => p.Id == pie.Id).FirstOrDefault();
             oldPie.PieName = pie.PieName;

@@ -8,6 +8,8 @@ namespace BethanysPieShopStockApp
     public partial class App : Application
     {
         public static NavigationService NavigationService { get; }  = new NavigationService();
+        public static PieDataService PieDataServie { get; } = new PieDataService();
+
         public App()
         {
             InitializeComponent();
