@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BethanysPieShopStockApp.Views.PieDetailView">
+    <ContentPage.Content>
+        <Grid Grid.Row="1" Margin="5" BackgroundColor="White" RowSpacing="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding SelectedPie.Name}" Margin="3" Style="{StaticResource PieTileNameStyle}"></Label>
+            <Label Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding SelectedPie.Price}" Style="{StaticResource PieTilePriceStyle}" HorizontalTextAlignment="End"></Label>
+            <Label Grid.Column="0" Grid.Row="1" Margin="3" Grid.ColumnSpan="2" Text="{Binding SelectedPie.ShortDescription}" ></Label>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
