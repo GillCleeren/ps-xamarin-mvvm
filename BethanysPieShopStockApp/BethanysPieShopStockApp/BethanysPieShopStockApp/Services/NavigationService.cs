@@ -1,9 +1,7 @@
 ﻿using BethanysPieShopStockApp.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Xamarin.Forms;
 
 namespace BethanysPieShopStockApp.Services
@@ -18,42 +16,22 @@ namespace BethanysPieShopStockApp.Services
 
         public void GoBack() => MainPage.Navigation.PopAsync();
 
-        public void NavigateTo(string pageKey, object parameter = null,
-            HistoryBehavior historyBehavior = HistoryBehavior.Default)
+        public void NavigateTo(string pageKey, object parameter = null)
         {
-            Type pageType;
-            if (pages.TryGetValue(pageKey, out pageType))
+            if (pages.TryGetValue(pageKey, out Type pageType))
             {
                 var page = (Page)Activator.CreateInstance(pageType);
                 page.SetNavigationArgs(parameter);
 
-                if (historyBehavior == HistoryBehavior.ClearHistory)
-                {
-                    MainPage.Navigation.InsertPageBefore(page, MainPage.Navigation.NavigationStack[0]);
-
-                    var existingPages = MainPage.Navigation.NavigationStack.ToList();
-                    for (int i = 1; i < existingPages.Count; i++)
-                        MainPage.Navigation.RemovePage(existingPages[i]);
-                }
-                else
-                {
-                    MainPage.Navigation.PushAsync(page);
-                }
+                MainPage.Navigation.PushAsync(page);
 
                 (page.BindingContext as BaseViewModel).Initialize(parameter);
             }
             else
             {
-                throw new ArgumentException($"No such page: {pageKey}.",
-                    nameof(pageKey));
+                throw new ArgumentException($"This page doesn't exist: {pageKey}.", nameof(pageKey));
             }
         }
-    }
-
-    public enum HistoryBehavior
-    {
-        Default,
-        ClearHistory
     }
 
     public static class NavigationExtensions
@@ -62,7 +40,7 @@ namespace BethanysPieShopStockApp.Services
 
         public static object GetNavigationArgs(this Page page)
         {
-            object argument = null;
+            object argument;
             arguments.TryGetValue(page, out argument);
 
             return argument;

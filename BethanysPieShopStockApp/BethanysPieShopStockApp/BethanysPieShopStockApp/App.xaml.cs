@@ -1,5 +1,4 @@
-﻿
-using BethanysPieShopStockApp.Services;
+﻿using BethanysPieShopStockApp.Services;
 using BethanysPieShopStockApp.Utility;
 using BethanysPieShopStockApp.Views;
 using Xamarin.Forms;
